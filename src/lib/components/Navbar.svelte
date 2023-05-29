@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { pb } from '$lib/services/pocketbase';
+	import { Admin } from 'pocketbase';
+
 	const ROUTES = [
 		{
 			name: 'archive',
@@ -20,8 +23,7 @@
 		<a class="btn btn-ghost normal-case text-xl" href="/">Ephemeris</a>
 	</div>
 	<div class="navbar-end">
-		<!-- TODO: check if user is admin-->
-		{#if true}
+		{#if pb.authStore.model instanceof Admin}
 			<a href="/dashboard" class="btn btn-ghost">Admin</a>
 		{/if}
 		{#each ROUTES as route}
