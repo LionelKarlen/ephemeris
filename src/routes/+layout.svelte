@@ -4,4 +4,6 @@
 </script>
 
 <Navbar />
-<slot />
+<div class="content flex flex-col px-20">
+	<slot />
+</div>
