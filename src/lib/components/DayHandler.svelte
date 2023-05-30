@@ -3,6 +3,7 @@
 	import type { EngagementDay } from '$lib/types/Day';
 	import { DayStatus } from '$lib/types/DayStatus';
 	import type Demonstrator from '$lib/types/Demonstrator';
+	import { isEditMode } from '$lib/services/store';
 	export let day: EngagementDay;
 	export let demonstrator: Demonstrator;
 	let status: DayStatus;
@@ -58,6 +59,9 @@
 	}
 
 	async function handleClick() {
+		if (!$isEditMode) {
+			return;
+		}
 		let tmpStatus = status;
 		tmpStatus += 1;
 		tmpStatus = tmpStatus % 4;
@@ -96,6 +100,7 @@
 <span
 	on:click={handleClick}
 	class="w-full h-full"
+	class:cursor-pointer={$isEditMode}
 	class:assigned={day.assigned?.includes(demonstrator.id)}
 >
 	{#if status == DayStatus.ASSIGNED}

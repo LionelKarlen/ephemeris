@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { FORMAT_STRING, MONTHS, mockDays } from '$lib/services/mockdays';
 	import type Day from '$lib/types/Day';
-	import { demonstrators } from '$lib/services/store';
-	import { onMount } from 'svelte';
+	import { demonstrators, isEditMode } from '$lib/services/store';
 	import Tile from './Tile.svelte';
 	import Tablerow from './Tablerow.svelte';
 	import { DateTime } from 'luxon';
@@ -67,7 +66,7 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 				</svg>
 			</button>
-			<h3 class="text-xl uppercase items-center flex">{MONTHS[month - 1]} - {month}</h3>
+			<h3 class="text-xl uppercase items-center flex">{MONTHS[month - 1]} - {year}</h3>
 			<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(1)}
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +93,10 @@
 		{#each $demonstrators as demonstrator}
 			<Tablerow {days} {demonstrator} />
 		{/each}
+		<div class="flex flex-row-reverse gap-4 mt-3">
+			<input type="checkbox" class="toggle toggle-primary" bind:checked={$isEditMode} />
+			<span class="label-text">Edit mode</span>
+		</div>
 	</div>
 {:else}
 	<!-- else content here -->
