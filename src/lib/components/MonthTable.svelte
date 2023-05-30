@@ -1,19 +1,47 @@
 <script lang="ts">
-	import { MONTHS, mockDays } from '$lib/services/mockdays';
+	import { FORMAT_STRING, MONTHS, mockDays } from '$lib/services/mockdays';
 	import type Day from '$lib/types/Day';
 	import { demonstrators } from '$lib/services/store';
 	import { onMount } from 'svelte';
 	import Tile from './Tile.svelte';
 	import Tablerow from './Tablerow.svelte';
+	import { DateTime } from 'luxon';
+	import { pb } from '$lib/services/pocketbase';
+	import type { EngagementDay } from '$lib/types/Day';
 
 	export let month: number;
 	export let year: number;
-	let days: Day[] = [];
+	let days: Day[];
 
-	onMount(() => {
-		days = mockDays(month, year);
+	onMount(async () => {
+		getData();
 	});
-	$: days = mockDays(month, year);
+	$: month, getData();
+
+	async function getData() {
+		days = await getDays();
+	}
+
+	async function getDays() {
+		const start = DateTime.utc(year, month, 1);
+		const end = start.endOf('month').plus(1);
+		const records: EngagementDay[] = await pb.collection('days').getFullList({
+			filter: `timestamp>="${start.toFormat(FORMAT_STRING)}" && timestamp < "${end.toFormat(
+				FORMAT_STRING
+			)}"`
+		});
+		console.log('records', records);
+
+		const timestamps = records.map((v) => {
+			return v.timestamp;
+		});
+		const mocks = mockDays(month, year, timestamps);
+
+		let days = [...mocks, ...records];
+		days.sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1));
+		console.log('days', days);
+		return days;
+	}
 
 	function handleChangeMonth(direction: number) {
 		let tmpMonth = month - 1;
@@ -26,48 +54,53 @@
 	}
 </script>
 
-<div class="table w-full flex flex-col">
-	<div class="flex flex-row control justify-between">
-		<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(-1)}
-			><svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="w-6 h-6"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-			</svg>
-		</button>
-		<h3 class="text-xl uppercase items-center flex">{MONTHS[month - 1]} - {month}</h3>
-		<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(1)}
-			><svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="w-6 h-6"
-			>
-				<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-			</svg>
-		</button>
-	</div>
-	<div class="flex flex-row w-full">
-		<div class="widetile tile" />
-		<div class="flex flex-row flex-grow">
-			{#each days as day, i}
-				<Tile width={100 / days.length} {day}>
-					{i + 1}
-				</Tile>
-			{/each}
+{#if days}
+	<!-- content here -->
+	<div class="table w-full flex flex-col">
+		<div class="flex flex-row control justify-between">
+			<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(-1)}
+				><svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+				</svg>
+			</button>
+			<h3 class="text-xl uppercase items-center flex">{MONTHS[month - 1]} - {month}</h3>
+			<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(1)}
+				><svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+				</svg>
+			</button>
 		</div>
+		<div class="flex flex-row w-full">
+			<div class="widetile tile" />
+			<div class="flex flex-row flex-grow">
+				{#each days as day, i}
+					<Tile width={100 / days.length} {day}>
+						{i + 1}
+					</Tile>
+				{/each}
+			</div>
+		</div>
+		{#each $demonstrators as demonstrator}
+			<Tablerow {days} {demonstrator} />
+		{/each}
 	</div>
-	{#each $demonstrators as demonstrator}
-		<Tablerow {days} {demonstrator} />
-	{/each}
-</div>
+{:else}
+	<!-- else content here -->
+{/if}
 
 <style global>
 	.widetile {

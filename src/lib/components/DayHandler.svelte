@@ -7,11 +7,10 @@
 
 	export let day: EngagementDay;
 	export let demonstrator: Demonstrator;
-	let status = DayStatus.NONE;
-	onMount(() => {
-		handleDayDisplay();
-	});
+	let status: DayStatus;
+	$: day, handleDayDisplay();
 	function handleDayDisplay() {
+		status = DayStatus.NONE;
 		if (day.id) {
 			if (day.assigned?.includes(demonstrator.id)) {
 				status = DayStatus.ASSIGNED;
@@ -23,7 +22,6 @@
 				status = DayStatus.RESERVED;
 			}
 		}
-		status = DayStatus.NONE;
 	}
 
 	function handleUpdateStatus(oldStatus: number) {
@@ -68,6 +66,7 @@
 		handleUpdateStatus(status);
 		status = tmpStatus;
 		await uploadDay();
+		handleDayDisplay();
 	}
 
 	async function uploadDay() {
