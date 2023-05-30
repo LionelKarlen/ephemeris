@@ -18,7 +18,7 @@
 		days = await getDays();
 	}
 
-	pb.collection('days').subscribe('*', (data) => {
+	pb.collection('days').subscribe('*', () => {
 		//TODO: Maybe clean this up so that we don't grab all data again, but this makes a minor difference in the end since it's only one request more.
 		getData();
 	});
@@ -121,5 +121,13 @@
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
+	}
+	.label-text {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 </style>

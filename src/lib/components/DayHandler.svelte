@@ -68,7 +68,6 @@
 		handleUpdateStatus(status);
 		status = tmpStatus;
 		await uploadDay();
-		handleDayDisplay();
 	}
 
 	function isDayEmpty(): boolean {
