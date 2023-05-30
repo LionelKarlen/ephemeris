@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { MONTHS, mockDays } from '$lib/services/mockdays';
 	import type Day from '$lib/types/Day';
+	import { demonstrators } from '$lib/services/store';
 	import { onMount } from 'svelte';
+	import Tile from './Tile.svelte';
+	import Tablerow from './Tablerow.svelte';
 
 	export let month: number;
 	export let year: number;
@@ -50,4 +53,33 @@
 			</svg>
 		</button>
 	</div>
+	<div class="flex flex-row w-full">
+		<div class="widetile tile" />
+		<div class="flex flex-row flex-grow">
+			{#each days as day, i}
+				<Tile width={100 / days.length}>
+					{i + 1}
+				</Tile>
+			{/each}
+		</div>
+	</div>
+	{#each $demonstrators as demonstrator}
+		<Tablerow {days} {demonstrator} />
+	{/each}
 </div>
+
+<style global>
+	.widetile {
+		min-width: 20%;
+		max-width: 20%;
+		min-height: 2.5rem;
+		max-height: 2.5rem;
+		justify-content: start;
+	}
+	.tile {
+		border: 1px black solid;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+</style>

@@ -7,7 +7,7 @@
 
 {#if $currentUser.model != null}
 	<Navbar />
-	<div class="content flex flex-col px-20 items-center">
+	<div class="content flex flex-col lg:px-20 md:px-10 items-center">
 		<slot />
 	</div>
 {:else}
