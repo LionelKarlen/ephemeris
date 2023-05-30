@@ -10,18 +10,22 @@
 
 <div
 	class="tile"
-	style={`min-width: ${width}%; max-width: ${width}%`}
+	style={`min-width: ${width}% !important; max-width: ${width}% !important`}
 	class:regular={dateTime.weekday == 3}
 	class:sunlab={dateTime.weekday == 7 && dateTime < dateTime.startOf('month').plus({ weeks: 1 })}
+	class:weekend={dateTime.weekday >= 6}
 >
 	<slot />
 </div>
 
 <style>
 	.regular {
-		background-color: blue;
+		background-color: rgb(165, 154, 238);
 	}
 	.sunlab {
-		background-color: orange;
+		background-color: rgb(253, 187, 65) !important;
+	}
+	.weekend {
+		background-color: rgb(255, 255, 123);
 	}
 </style>
