@@ -18,6 +18,11 @@
 		days = await getDays();
 	}
 
+	pb.collection('days').subscribe('*', (data) => {
+		//TODO: Maybe clean this up so that we don't grab all data again, but this makes a minor difference in the end since it's only one request more.
+		getData();
+	});
+
 	async function getDays() {
 		const start = DateTime.utc(year, month, 1);
 		const end = start.endOf('month').plus(1);

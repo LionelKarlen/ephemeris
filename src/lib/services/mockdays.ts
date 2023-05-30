@@ -21,9 +21,7 @@ export const MONTHS = [
 export function mockDays(month: number, year: number, realDays: string[]) {
 	const days: Day[] = [];
 	const start = DateTime.utc(year, month, 1);
-	console.log(start);
 	const end = start.endOf('month').startOf('day');
-	console.log('end', end);
 	for (let index = 1; index <= end.day; index++) {
 		const dateTime = DateTime.utc(year, month, index);
 		const timestamp = dateTime.toFormat(FORMAT_STRING);
