@@ -26,6 +26,6 @@
 		background-color: rgb(253, 187, 65) !important;
 	}
 	.weekend {
-		background-color: rgb(255, 255, 123);
+		background-color: rgb(255, 123, 226);
 	}
 </style>

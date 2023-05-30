@@ -3,8 +3,6 @@
 	import type { EngagementDay } from '$lib/types/Day';
 	import { DayStatus } from '$lib/types/DayStatus';
 	import type Demonstrator from '$lib/types/Demonstrator';
-	import { onMount } from 'svelte';
-
 	export let day: EngagementDay;
 	export let demonstrator: Demonstrator;
 	let status: DayStatus;
@@ -69,8 +67,23 @@
 		handleDayDisplay();
 	}
 
+	function isDayEmpty(): boolean {
+		return (
+			day.assigned?.length == 0 &&
+			day.reserved?.length == 0 &&
+			day.unable?.length == 0 &&
+			!day.visitorType &&
+			!day.engagementType
+		);
+	}
+
 	async function uploadDay() {
 		if (day.id) {
+			if (isDayEmpty()) {
+				console.log('empty');
+				await pb.collection('days').delete(day.id);
+				return;
+			}
 			day = await pb.collection('days').update(day.id, day);
 		} else {
 			day = await pb.collection('days').create(day);

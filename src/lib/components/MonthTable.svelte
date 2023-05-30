@@ -13,9 +13,6 @@
 	export let year: number;
 	let days: Day[];
 
-	onMount(async () => {
-		getData();
-	});
 	$: month, getData();
 
 	async function getData() {
