@@ -10,8 +10,8 @@
 <div class="flex flex-row w-full">
 	<div class="widetile tile">{demonstrator.name}</div>
 	<div class="flex flex-row flex-grow">
-		{#each days as day, i}
-			<Tile width={100 / days.length} />
+		{#each days as day}
+			<Tile width={100 / days.length} {day} />
 		{/each}
 	</div>
 </div>

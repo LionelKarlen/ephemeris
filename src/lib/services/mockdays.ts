@@ -25,7 +25,8 @@ export function mockDays(month: number, year: number) {
 	const end = start.endOf('month').startOf('day');
 	console.log('end', end);
 	for (let index = 1; index <= end.day; index++) {
-		const timestamp = DateTime.utc(year, month, index).toFormat(FORMAT_STRING);
+		const dateTime = DateTime.utc(year, month, index);
+		const timestamp = dateTime.toFormat(FORMAT_STRING);
 		const obj: Day = {
 			timestamp: timestamp
 		};

@@ -5,3 +5,4 @@ import { pb } from './pocketbase';
 export const demonstrators = writable<Demonstrator[]>(
 	await pb.collection('demonstrators').getFullList()
 );
+export const isEditMode = writable<boolean>(false);

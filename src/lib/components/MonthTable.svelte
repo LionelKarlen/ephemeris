@@ -13,6 +13,7 @@
 	onMount(() => {
 		days = mockDays(month, year);
 	});
+	$: days = mockDays(month, year);
 
 	function handleChangeMonth(direction: number) {
 		let tmpMonth = month - 1;
@@ -57,7 +58,7 @@
 		<div class="widetile tile" />
 		<div class="flex flex-row flex-grow">
 			{#each days as day, i}
-				<Tile width={100 / days.length}>
+				<Tile width={100 / days.length} {day}>
 					{i + 1}
 				</Tile>
 			{/each}
