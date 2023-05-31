@@ -1,5 +1,7 @@
 <script>
 	import MonthTable from '$lib/components/MonthTable.svelte';
+	import { DateTime } from 'luxon';
+	let dateTime = DateTime.utc();
 </script>
 
-<MonthTable month={1} year={2023} />
+<MonthTable month={dateTime.month} year={dateTime.year} />
