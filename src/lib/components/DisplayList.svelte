@@ -86,7 +86,7 @@
 	<div class="flex flex-row justify-center">
 		<button class="btn" on:click={addToList}>Add {title}</button>
 	</div>
-	<div class="flex flex-row justify-center">
+	<div class="flex flex-row justify-end">
 		<button class="btn btn-primary" on:click={update}>Update</button>
 	</div>
 </div>
