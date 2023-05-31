@@ -29,6 +29,7 @@
 				<ul tabindex="-1" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
 					<li><a href="/dashboard/engagementType">Engagement Types</a></li>
 					<li><a href="/dashboard/visitorType">Visitor Types</a></li>
+					<li><a href="/dashboard/demonstrators">Demonstrators</a></li>
 				</ul>
 			</div>
 		{/if}

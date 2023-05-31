@@ -5,8 +5,9 @@
 	import { DateTime } from 'luxon';
 	import { FORMAT_STRING, isDayFirstSunday, isDayWednesday } from '$lib/services/mockdays';
 	import { engagementTypes, visitorTypes } from '$lib/services/store';
+	import type { PageData } from './$types';
 
-	export let data: any;
+	export let data: PageData;
 
 	let day: EngagementDay;
 	let timestamp: DateTime;
