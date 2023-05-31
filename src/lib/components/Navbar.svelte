@@ -24,7 +24,13 @@
 	</div>
 	<div class="navbar-end">
 		{#if pb.authStore.model instanceof Admin}
-			<a href="/dashboard" class="btn btn-ghost">Admin</a>
+			<div class="dropdown">
+				<button tabindex="0" class="btn btn-ghost">Admin</button>
+				<ul tabindex="-1" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+					<li><a href="/dashboard/engagementType">Engagement Types</a></li>
+					<li><a href="/dashboard/visitorType">Visitor Types</a></li>
+				</ul>
+			</div>
 		{/if}
 		{#each ROUTES as route}
 			<a class="btn btn-ghost" href={route.route}>

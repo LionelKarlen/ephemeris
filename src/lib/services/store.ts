@@ -9,7 +9,7 @@ export const demonstrators = writable<Demonstrator[]>(
 );
 
 export const visitorTypes = writable<VisitorType[]>(
-	await pb.collection('visitorTypes').getFullList()
+	await pb.collection('visitorType').getFullList()
 );
 export const engagementTypes = writable<EngagementType[]>(
 	await pb.collection('engagementType').getFullList()
