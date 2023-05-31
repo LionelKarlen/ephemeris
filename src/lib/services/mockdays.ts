@@ -35,3 +35,11 @@ export function mockDays(month: number, year: number, realDays: string[]) {
 	}
 	return days;
 }
+
+export function isDayWednesday(day: DateTime) {
+	return day.weekday == 3;
+}
+
+export function isDayFirstSunday(day: DateTime) {
+	return day.weekday == 7 && day < day.startOf('month').plus({ weeks: 1 });
+}

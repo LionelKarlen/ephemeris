@@ -90,7 +90,13 @@
 			<div class="flex flex-row flex-grow">
 				{#each days as day, i}
 					<Tile width={100 / days.length} {day}>
-						{i + 1}
+						{#if day.id}
+							<a href={`/day/${day.id}`}>
+								{i + 1}
+							</a>
+						{:else}
+							{i + 1}
+						{/if}
 					</Tile>
 				{/each}
 			</div>

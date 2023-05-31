@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FORMAT_STRING } from '$lib/services/mockdays';
+	import { FORMAT_STRING, isDayFirstSunday, isDayWednesday } from '$lib/services/mockdays';
 	import type Day from '$lib/types/Day';
 	import { DateTime } from 'luxon';
 
@@ -11,8 +11,8 @@
 <div
 	class="tile"
 	style={`min-width: ${width}% !important; max-width: ${width}% !important`}
-	class:regular={dateTime.weekday == 3}
-	class:sunlab={dateTime.weekday == 7 && dateTime < dateTime.startOf('month').plus({ weeks: 1 })}
+	class:regular={isDayWednesday(dateTime)}
+	class:sunlab={isDayFirstSunday(dateTime)}
 	class:weekend={dateTime.weekday >= 6}
 >
 	<slot />
