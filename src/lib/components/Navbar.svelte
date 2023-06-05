@@ -24,12 +24,13 @@
 	</div>
 	<div class="navbar-end">
 		{#if pb.authStore.model instanceof Admin}
-			<div class="dropdown">
+			<div class="dropdown z-10">
 				<button tabindex="0" class="btn btn-ghost">Admin</button>
 				<ul tabindex="-1" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
 					<li><a href="/dashboard/engagementType">Engagement Types</a></li>
 					<li><a href="/dashboard/visitorType">Visitor Types</a></li>
 					<li><a href="/dashboard/demonstrators">Demonstrators</a></li>
+					<li><a href="/dashboard/schedule">Schedule</a></li>
 				</ul>
 			</div>
 		{/if}

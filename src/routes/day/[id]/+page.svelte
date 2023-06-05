@@ -3,7 +3,12 @@
 	import { pb } from '$lib/services/pocketbase';
 	import type { EngagementDay } from '$lib/types/Day';
 	import { DateTime } from 'luxon';
-	import { FORMAT_STRING, isDayFirstSunday, isDayWednesday } from '$lib/services/mockdays';
+	import {
+		FORMAT_STRING,
+		formatLegible,
+		isDayFirstSunday,
+		isDayWednesday
+	} from '$lib/services/mockdays';
 	import { engagementTypes, visitorTypes } from '$lib/services/store';
 	import type { PageData } from './$types';
 
@@ -47,7 +52,7 @@
 		on:submit|preventDefault={handleSubmit}
 	>
 		<h3 class="text-2xl">
-			{timestamp.toFormat('cccc, dd. LLL yyyy', { locale: 'de-ch' })}
+			{formatLegible(timestamp)}
 		</h3>
 		<div class="divider" />
 		<div class="form-control w-full max-w-md">

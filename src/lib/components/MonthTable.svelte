@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { FORMAT_STRING, MONTHS, mockDays } from '$lib/services/mockdays';
+	import { FORMAT_STRING, MONTHS, formatLegible, mockDays } from '$lib/services/mockdays';
 	import type Day from '$lib/types/Day';
-	import { demonstrators, isEditMode } from '$lib/services/store';
+	import { demonstrators, isEditMode, warnings } from '$lib/services/store';
 	import Tile from './Tile.svelte';
 	import Tablerow from './Tablerow.svelte';
 	import { DateTime } from 'luxon';
 	import { pb } from '$lib/services/pocketbase';
 	import type { EngagementDay } from '$lib/types/Day';
+	import { onDestroy } from 'svelte';
 
 	export let month: number;
 	export let year: number;
@@ -17,6 +18,10 @@
 	async function getData() {
 		days = await getDays();
 	}
+
+	onDestroy(async () => {
+		pb.collection('days').unsubscribe();
+	});
 
 	pb.collection('days').subscribe('*', () => {
 		//TODO: Maybe clean this up so that we don't grab all data again, but this makes a minor difference in the end since it's only one request more.
@@ -108,6 +113,35 @@
 			<input type="checkbox" class="toggle toggle-primary" bind:checked={$isEditMode} />
 			<span class="label-text">Edit mode</span>
 		</div>
+		{#if $warnings.length > 0}
+			<div class="flex flex-col mt-10">
+				<div class="alert shadow-lg alert-warning">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="stroke-current shrink-0 h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+						/></svg
+					>
+					<div>
+						<h3 class="font-bold">Warning:</h3>
+						<div class="text-xs">The following day(s) could not be assigned:</div>
+						<ul>
+							{#each $warnings as warning}
+								<li>
+									{formatLegible(DateTime.fromFormat(warning.timestamp, FORMAT_STRING))}
+								</li>
+							{/each}
+						</ul>
+					</div>
+				</div>
+			</div>
+		{/if}
 	</div>
 {:else}
 	<!-- else content here -->

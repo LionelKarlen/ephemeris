@@ -18,6 +18,11 @@ export const MONTHS = [
 	'december'
 ];
 
+export function formatLegible(dateTime: DateTime): string {
+	//TODO: Update locale based on defined locale
+	return dateTime.toFormat('cccc, dd. LLL yyyy', { locale: 'de-ch' });
+}
+
 export function mockDays(month: number, year: number, realDays: string[]) {
 	const days: Day[] = [];
 	const start = DateTime.utc(year, month, 1);
