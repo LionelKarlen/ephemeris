@@ -52,7 +52,7 @@ export default async function generateSchedule(year: number): Promise<Error | vo
 		console.log(warnings);
 		console.log(demonstrators);
 	} catch (error) {
-		return Error(error);
+		return Error(error as string);
 	}
 }
 

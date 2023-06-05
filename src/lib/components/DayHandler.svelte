@@ -3,7 +3,7 @@
 	import type { EngagementDay } from '$lib/types/Day';
 	import { DayStatus } from '$lib/types/DayStatus';
 	import type Demonstrator from '$lib/types/Demonstrator';
-	import { isEditMode } from '$lib/services/store';
+	import { isEditMode, warnings } from '$lib/services/store';
 	export let day: EngagementDay;
 	export let demonstrator: Demonstrator;
 	let status: DayStatus;
@@ -24,14 +24,14 @@
 	}
 
 	function handleUpdateStatus(oldStatus: number) {
-		if (oldStatus == 0) {
+		if (oldStatus == DayStatus.NONE) {
 			if (day.unable) {
 				day.unable.push(demonstrator.id);
 			} else {
 				day.unable = [demonstrator.id];
 			}
 		}
-		if (oldStatus == 1) {
+		if (oldStatus == DayStatus.UNABLE) {
 			if (day.unable) {
 				day.unable = day.unable.filter((v) => v != demonstrator.id);
 			}
@@ -41,7 +41,7 @@
 				day.reserved = [demonstrator.id];
 			}
 		}
-		if (oldStatus == 2) {
+		if (oldStatus == DayStatus.RESERVED) {
 			if (day.reserved) {
 				day.reserved = day.reserved.filter((v) => v != demonstrator.id);
 			}
@@ -51,7 +51,7 @@
 				day.assigned = [demonstrator.id];
 			}
 		}
-		if (oldStatus == 3) {
+		if (oldStatus == DayStatus.ASSIGNED) {
 			if (day.assigned) {
 				day.assigned = day.assigned.filter((v) => v != demonstrator.id);
 			}
@@ -67,6 +67,13 @@
 		tmpStatus = tmpStatus % 4;
 		handleUpdateStatus(status);
 		status = tmpStatus;
+		if (status == DayStatus.ASSIGNED) {
+			const warning = $warnings.filter((v) => v.day == day.id)[0];
+			if (warning.id) {
+				await pb.collection('warnings').delete(warning.id);
+				warnings.set(await pb.collection('warnings').getFullList());
+			}
+		}
 		await uploadDay();
 	}
 
