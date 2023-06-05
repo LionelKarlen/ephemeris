@@ -10,4 +10,5 @@ export interface EngagementDay extends Day {
 	visitorNumber?: number;
 	visitorType?: string;
 	engagementType?: string;
+	comment?: string;
 }

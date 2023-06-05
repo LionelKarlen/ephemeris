@@ -98,6 +98,17 @@
 				{/each}
 			</select>
 		</div>
+		<div class="divider" />
+		<div class="form-control w-full max-w-md">
+			<label for="numVisitorInput" class="label"><span class="label-text">Comment</span></label>
+			<input
+				id="numVisitorInput"
+				type="text"
+				placeholder="Comment"
+				bind:value={day.comment}
+				class="input input-bordered w-full max-w-md"
+			/>
+		</div>
 		<button class="btn btn-primary">SEND</button>
 	</form>
 {:else}

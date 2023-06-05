@@ -106,6 +106,7 @@
 	on:click={handleClick}
 	class="w-full h-full"
 	class:cursor-pointer={$isEditMode}
+	class:cursor-default={!$isEditMode}
 	class:assigned={day.assigned?.includes(demonstrator.id)}
 >
 	{#if status == DayStatus.ASSIGNED}

@@ -32,9 +32,6 @@ export default async function generateSchedule(year: number): Promise<Error | vo
 			const demonstrator = determineDemonstratorForDay(day, demonstrators, lastDemonstrator);
 			updateDeficit(demonstrator, demonstrators);
 			if (demonstrator) {
-				//TODO: Decide what to do with already assigned users
-				// As it stands, we simply add the newly assigned user to the list
-				// This could be changed so that previous assignments get ignored or overwritten
 				const assigned = day.assigned ? day.assigned : [];
 				day.assigned = [...assigned, demonstrator.id];
 				lastDemonstrator = demonstrator;
