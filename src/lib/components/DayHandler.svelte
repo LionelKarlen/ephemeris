@@ -4,6 +4,7 @@
 	import { DayStatus } from '$lib/types/DayStatus';
 	import type Demonstrator from '$lib/types/Demonstrator';
 	import { isEditMode, warnings } from '$lib/services/store';
+	import type Warning from '$lib/types/Warning';
 	export let day: EngagementDay;
 	export let demonstrator: Demonstrator;
 	let status: DayStatus;
@@ -68,8 +69,8 @@
 		handleUpdateStatus(status);
 		status = tmpStatus;
 		if (status == DayStatus.ASSIGNED) {
-			const warning = $warnings.filter((v) => v.day == day.id)[0];
-			if (warning.id) {
+			const warning: Warning | undefined = $warnings.find((v) => v.day == day.id);
+			if (warning && warning.id) {
 				await pb.collection('warnings').delete(warning.id);
 				warnings.set(await pb.collection('warnings').getFullList());
 			}
@@ -101,9 +102,7 @@
 	}
 </script>
 
-<!-- TODO: a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<span
+<button
 	on:click={handleClick}
 	class="w-full h-full"
 	class:cursor-pointer={$isEditMode}
@@ -147,10 +146,10 @@
 			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 		</svg>
 	{/if}
-</span>
+</button>
 
 <style>
-	span {
+	button {
 		display: flex;
 		align-items: center;
 		justify-content: center;
