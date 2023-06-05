@@ -64,7 +64,7 @@
 	<!-- content here -->
 	<div class="table w-full flex flex-col">
 		<div class="flex flex-row control justify-between">
-			<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(-1)}
+			<button class="btn btn-square btn-primary rounded-none" on:click={() => handleChangeMonth(-1)}
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -77,7 +77,7 @@
 				</svg>
 			</button>
 			<h3 class="text-xl uppercase items-center flex">{MONTHS[month - 1]} - {year}</h3>
-			<button class="btn btn-square btn-primary" on:click={() => handleChangeMonth(1)}
+			<button class="btn btn-square btn-primary rounded-none" on:click={() => handleChangeMonth(1)}
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
