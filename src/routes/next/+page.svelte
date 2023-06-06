@@ -4,4 +4,5 @@
 	let dateTime = DateTime.utc();
 </script>
 
+<h3 class="text-3xl">Next Year</h3>
 <MonthTable month={dateTime.month} year={dateTime.year + 1} />
