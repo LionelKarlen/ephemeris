@@ -36,7 +36,6 @@
 				FORMAT_STRING
 			)}"`
 		});
-		console.log('records', records);
 
 		const timestamps = records.map((v) => {
 			return v.timestamp;
@@ -45,7 +44,6 @@
 
 		let days = [...mocks, ...records];
 		days.sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1));
-		console.log('days', days);
 		return days;
 	}
 

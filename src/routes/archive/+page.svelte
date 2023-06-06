@@ -40,7 +40,7 @@
 				{#each archiveCaches as archive}
 					<tr>
 						<td>
-							<a href={`archive/${archive.year}`}>{archive.year}</a>
+							<a href={`archive/${archive.year}`} class="link">{archive.year}</a>
 						</td>
 						<td>{archive.totalVisitors}</td>
 						<td>{archive.numEngagements}</td>
