@@ -1,5 +1,8 @@
+import type ArchiveCache from '$lib/types/ArchiveCache';
+import type { EngagementDay } from '$lib/types/Day';
 import type Day from '$lib/types/Day';
 import { DateTime } from 'luxon';
+import { pb } from './pocketbase';
 
 export const FORMAT_STRING = 'yyyy-MM-dd HH:mm:ss.SSS';
 
@@ -47,4 +50,30 @@ export function isDayWednesday(day: DateTime) {
 
 export function isDayFirstSunday(day: DateTime) {
 	return day.weekday == 7 && day < day.startOf('month').plus({ weeks: 1 });
+}
+
+export async function archiveYear(year: number) {
+	// Get all days in year
+	const start = DateTime.utc(year, 1, 1);
+	const end = start.endOf('year').startOf('day').plus({ day: 1 });
+	const days: EngagementDay[] = await pb.collection('days').getFullList({
+		filter: `timestamp>="${start.toFormat(FORMAT_STRING)}" && timestamp < "${end.toFormat(
+			FORMAT_STRING
+		)}"`
+	});
+
+	let visitors = 0;
+
+	// Iterate days to add up visitors
+	// TODO: Add engagementType and visitorType
+	for (const day of days) {
+		visitors += day.visitorNumber ? day.visitorNumber : 0;
+	}
+
+	const archiveCache: ArchiveCache = {
+		year: year,
+		numEngagements: days.length,
+		totalVisitors: visitors
+	};
+	await pb.collection('archiveCaches').create(archiveCache);
 }
