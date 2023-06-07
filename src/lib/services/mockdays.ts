@@ -53,6 +53,11 @@ export function isDayFirstSunday(day: DateTime) {
 }
 
 export async function archiveYear(year: number) {
+	const archiveCache = await generateArchiveCache(year);
+	await pb.collection('archiveCaches').create(archiveCache);
+}
+
+export async function generateArchiveCache(year: number): Promise<ArchiveCache> {
 	// Get all days in year
 	const start = DateTime.utc(year, 1, 1);
 	const end = start.endOf('year').startOf('day').plus({ day: 1 });
@@ -70,10 +75,23 @@ export async function archiveYear(year: number) {
 		visitors += day.visitorNumber ? day.visitorNumber : 0;
 	}
 
-	const archiveCache: ArchiveCache = {
+	return {
 		year: year,
 		numEngagements: days.length,
 		totalVisitors: visitors
 	};
-	await pb.collection('archiveCaches').create(archiveCache);
+}
+
+export async function updateArchiveCache(archiveCache: ArchiveCache) {
+	const bodyArchiveCache = await generateArchiveCache(archiveCache.year);
+	if (archiveCache.id) {
+		await pb.collection('archiveCaches').update(archiveCache.id, bodyArchiveCache);
+		const obj: ArchiveCache = {
+			id: archiveCache.id,
+			year: bodyArchiveCache.year,
+			numEngagements: bodyArchiveCache.numEngagements,
+			totalVisitors: bodyArchiveCache.totalVisitors
+		};
+		return obj;
+	}
 }

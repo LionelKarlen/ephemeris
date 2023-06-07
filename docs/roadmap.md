@@ -27,4 +27,9 @@
 
 - Update next year
 - generate calendar
+
+## 0.6.0
+
 - localisation
+- statistics
+- refresh statistics
