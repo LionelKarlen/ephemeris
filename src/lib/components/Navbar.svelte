@@ -18,7 +18,7 @@
 	];
 </script>
 
-<div class="navbar bg-base-100 mb-20">
+<div class="navbar bg-base-100 mb-16">
 	<div class="navbar-start">
 		<a class="btn btn-ghost normal-case text-xl" href="/">Ephemeris</a>
 	</div>

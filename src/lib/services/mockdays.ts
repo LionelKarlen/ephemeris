@@ -69,16 +69,31 @@ export async function generateArchiveCache(year: number): Promise<ArchiveCache> 
 
 	let visitors = 0;
 
-	// Iterate days to add up visitors
-	// TODO: Add engagementType and visitorType
+	// Iterate days to add up visitors, engagementTypes, and visitorTypeks
+	// We use a map here, because the engagementTypes are user-defined
+	const engagementTypesMap: Map<string, number> = new Map();
+	const visitorTypesMap: Map<string, number> = new Map();
 	for (const day of days) {
 		visitors += day.visitorNumber ? day.visitorNumber : 0;
+
+		if (day.engagementType) {
+			const value = engagementTypesMap.get(day.engagementType) ?? 0;
+			engagementTypesMap.set(day.engagementType, value + 1);
+		}
+
+		if (day.visitorType) {
+			const value = visitorTypesMap.get(day.visitorType) ?? 0;
+			visitorTypesMap.set(day.visitorType, value + 1);
+		}
 	}
+	console.log(engagementTypesMap);
 
 	return {
 		year: year,
 		numEngagements: days.length,
-		totalVisitors: visitors
+		totalVisitors: visitors,
+		engagementTypes: Object.fromEntries(engagementTypesMap),
+		visitorTypes: Object.fromEntries(visitorTypesMap)
 	};
 }
 
@@ -90,7 +105,9 @@ export async function updateArchiveCache(archiveCache: ArchiveCache) {
 			id: archiveCache.id,
 			year: bodyArchiveCache.year,
 			numEngagements: bodyArchiveCache.numEngagements,
-			totalVisitors: bodyArchiveCache.totalVisitors
+			totalVisitors: bodyArchiveCache.totalVisitors,
+			engagementTypes: bodyArchiveCache.engagementTypes,
+			visitorTypes: bodyArchiveCache.visitorTypes
 		};
 		return obj;
 	}
