@@ -9,7 +9,7 @@
 		isDayFirstSunday,
 		isDayWednesday
 	} from '$lib/services/mockdays';
-	import { engagementTypes, visitorTypes } from '$lib/services/store';
+	import { engagementTypes, showModal, visitorTypes } from '$lib/services/store';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -40,6 +40,7 @@
 		if (day.id) {
 			await pb.collection('days').update(day.id, day);
 		}
+		showModal.set(true);
 		goto('/');
 	}
 
@@ -109,7 +110,7 @@
 				class="input input-bordered w-full max-w-md"
 			/>
 		</div>
-		<button class="btn btn-primary">SEND</button>
+		<button class="btn btn-primary">save</button>
 	</form>
 {:else}
 	no data

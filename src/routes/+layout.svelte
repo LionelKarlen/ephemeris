@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Login from '$lib/components/Login.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import { currentUser } from '$lib/services/pocketbase';
+	import { showModal } from '$lib/services/store';
 	import '../app.postcss';
 	import Navbar from '../lib/components/Navbar.svelte';
 </script>
@@ -10,6 +12,9 @@
 	<div class="content flex flex-col lg:px-20 md:px-10 items-center">
 		<slot />
 	</div>
+	{#if $showModal}
+		<Modal dismissSeconds={1.5} />
+	{/if}
 {:else}
 	<Login />
 {/if}

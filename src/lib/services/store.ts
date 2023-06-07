@@ -17,3 +17,5 @@ export const engagementTypes = writable<EngagementType[]>(
 );
 export const warnings = writable<Warning[]>(await pb.collection('warnings').getFullList());
 export const isEditMode = writable<boolean>(false);
+
+export const showModal = writable<boolean>(false);
