@@ -11,6 +11,7 @@
 	} from '$lib/services/mockdays';
 	import { engagementTypes, showModal, visitorTypes } from '$lib/services/store';
 	import type { PageData } from './$types';
+	import { t } from '$lib/services/i18n';
 
 	export let data: PageData;
 
@@ -58,7 +59,7 @@
 		<div class="divider" />
 		<div class="form-control w-full max-w-md">
 			<label for="numVisitorInput" class="label"
-				><span class="label-text">Visitor Number</span></label
+				><span class="label-text">{$t('engagementForm.visitorNumber')}</span></label
 			>
 			<input
 				id="numVisitorInput"
@@ -71,14 +72,14 @@
 		</div>
 		<div class="form-control w-full max-w-md">
 			<label for="visitorTypeInput" class="label">
-				<span class="label-text"> Visitor Type </span>
+				<span class="label-text">{$t('engagementForm.visitorType')}</span>
 			</label>
 			<select
 				id="visitorTypeInput"
 				class="select select-bordered w-full max-w-mdi font-normal"
 				bind:value={day.visitorType}
 			>
-				<option disabled class="text-primary" value={''}>Visitor Type</option>
+				<option disabled class="text-primary" value={''}>{$t('engagementForm.visitorType')}</option>
 				{#each $visitorTypes as visitorType}
 					<option value={visitorType.id}>{visitorType.name}</option>
 				{/each}
@@ -86,14 +87,16 @@
 		</div>
 		<div class="form-control w-full max-w-md">
 			<label for="engagementTypeInput" class="label">
-				<span class="label-text"> Engagement Type </span>
+				<span class="label-text"> {$t('engagementForm.engagementType')}</span>
 			</label>
 			<select
 				id="engagementTypeInput"
 				class="select select-bordered w-full max-w-mdi font-normal"
 				bind:value={day.engagementType}
 			>
-				<option disabled class="text-primary" value={''}>Engagement Type</option>
+				<option disabled class="text-primary" value={''}
+					>{$t('engagementForm.engagementType')}</option
+				>
 				{#each $engagementTypes as engagementType}
 					<option value={engagementType.id}>{engagementType.name}</option>
 				{/each}
@@ -101,7 +104,9 @@
 		</div>
 		<div class="divider" />
 		<div class="form-control w-full max-w-md">
-			<label for="numVisitorInput" class="label"><span class="label-text">Comment</span></label>
+			<label for="numVisitorInput" class="label"
+				><span class="label-text">{$t('engagementForm.comment')}</span></label
+			>
 			<input
 				id="numVisitorInput"
 				type="text"
@@ -110,7 +115,7 @@
 				class="input input-bordered w-full max-w-md"
 			/>
 		</div>
-		<button class="btn btn-primary">save</button>
+		<button class="btn btn-primary">{$t('engagementForm.save')}</button>
 	</form>
 {:else}
 	no data

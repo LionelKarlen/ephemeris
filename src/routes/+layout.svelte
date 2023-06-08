@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LangSwitcher from '$lib/components/LangSwitcher.svelte';
 	import Login from '$lib/components/Login.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import { currentUser } from '$lib/services/pocketbase';
@@ -15,6 +16,7 @@
 	{#if $showModal}
 		<Modal dismissSeconds={1.5} />
 	{/if}
+	<LangSwitcher />
 {:else}
 	<Login />
 {/if}

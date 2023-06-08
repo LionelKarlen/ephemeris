@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '$lib/services/i18n';
 	import { demonstrators } from '$lib/services/store';
 </script>
 
@@ -6,7 +7,7 @@
 	<table class="table w-full">
 		<thead>
 			<tr>
-				<th>Demonstrator</th>
+				<th>{$t('demonstrators.demonstrator')}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,6 +22,6 @@
 		</tbody>
 	</table>
 	<div class="flex flex-row justify-center">
-		<a class="btn" href="demonstrators/new">Add Demonstrator</a>
+		<a class="btn" href="demonstrators/new">{$t('demonstrators.addDemonstrator')}</a>
 	</div>
 </div>

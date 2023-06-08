@@ -3,27 +3,12 @@ import type { EngagementDay } from '$lib/types/Day';
 import type Day from '$lib/types/Day';
 import { DateTime } from 'luxon';
 import { pb } from './pocketbase';
+import { locale } from '$lib/services/i18n';
 
 export const FORMAT_STRING = 'yyyy-MM-dd HH:mm:ss.SSS';
 
-export const MONTHS = [
-	'january',
-	'february',
-	'march',
-	'april',
-	'may',
-	'june',
-	'july',
-	'august',
-	'september',
-	'october',
-	'november',
-	'december'
-];
-
 export function formatLegible(dateTime: DateTime): string {
-	//TODO: Update locale based on defined locale
-	return dateTime.toFormat('cccc, dd. LLL yyyy', { locale: 'de-ch' });
+	return dateTime.toLocaleString(DateTime.DATE_HUGE, { locale: locale.get() });
 }
 
 export function mockDays(month: number, year: number, realDays: string[]) {

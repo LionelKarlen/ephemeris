@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { t } from '$lib/services/i18n';
 	import { archiveYear, updateArchiveCache } from '$lib/services/mockdays';
 	import { currentUser, pb } from '$lib/services/pocketbase';
 	import type ArchiveCache from '$lib/types/ArchiveCache';
@@ -31,10 +32,10 @@
 		<table class="table w-full">
 			<thead>
 				<tr>
-					<th>Archive</th>
-					<th>Visitors</th>
-					<th>Engagements</th>
-					<th class="flex justify-end">Actions</th>
+					<th>{$t('archive.archive')}</th>
+					<th>{$t('archive.visitorNumber')}</th>
+					<th>{$t('archive.engagementNumber')}</th>
+					<th class="flex justify-end">{$t('archive.actions')}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -117,21 +118,21 @@
 			</tbody>
 		</table>
 	{:else}
-		No archived data.
+		{$t('archive.noArchivedData')}
 	{/if}
 	{#if $currentUser.model instanceof Admin}
 		<div class="divider" />
 		<form class="form justify-center flex flex-col items-center gap-2 w-2/3">
 			<div class="form-control w-full max-w-md">
 				<label for="archiveYearInput" class="label">
-					<span class="label-text"> Archive Year </span>
+					<span class="label-text"> {$t('archive.archiveYearLabel')}</span>
 				</label>
 				<select
 					id="archiveYearInput"
 					class="select select-bordered w-full max-w-md font-normal"
 					bind:value={year}
 				>
-					<option disabled class="text-primary" value={''}>Archive Year</option>
+					<option disabled class="text-primary" value={''}>{$t('archive.archiveYearLabel')}</option>
 					<option value={DateTime.utc().year - 1}>{DateTime.utc().year - 1}</option>
 					<option value={DateTime.utc().year}>{DateTime.utc().year}</option>
 					<option value={DateTime.utc().year + 1}>{DateTime.utc().year + 1}</option>
@@ -145,7 +146,7 @@
 					await getData();
 				}}
 			>
-				Archive year</button
+				{$t('archive.archiveYearButton')}</button
 			>
 		</form>
 	{/if}

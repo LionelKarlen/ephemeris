@@ -4,6 +4,7 @@
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	import { demonstrators } from '$lib/services/store';
+	import { t } from '$lib/services/i18n';
 
 	export let data: PageData;
 
@@ -54,7 +55,9 @@
 	>
 		<div class="flex flex-row items-center gap-4">
 			<h3 class="text-2xl">
-				{data.id == 'new' ? 'New' : 'Edit'} Demonstrator
+				{data.id == 'new'
+					? $t('demonstrators.newDemonstrator')
+					: $t('demonstrators.editDemonstrator')}
 			</h3>
 			{#if data.id != 'new'}
 				<button class="btn btn-circle btn-ghost text-error" on:click={deleteDemonstrator}>
@@ -77,7 +80,9 @@
 		</div>
 		<div class="divider" />
 		<div class="form-control w-full max-w-md">
-			<label for="demonstratorName" class="label"><span class="label-text">Name</span></label>
+			<label for="demonstratorName" class="label"
+				><span class="label-text">{$t('demonstrators.name')}</span></label
+			>
 			<input
 				id="demonstratorName"
 				type="text"
@@ -88,11 +93,11 @@
 		</div>
 		<div class="form-control w-full max-w-md">
 			<label class="label cursor-pointer flex flex-col">
-				<span class="label-text self-start">Sunlab</span>
+				<span class="label-text self-start">{$t('demonstrators.sunlab')}</span>
 				<input type="checkbox" class="toggle" bind:checked={demonstrator.isSunlab} />
 			</label>
 		</div>
-		<button class="btn btn-primary">SEND</button>
+		<button class="btn btn-primary">{$t('demonstrators.save')}</button>
 	</form>
 {:else}
 	No data

@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { FORMAT_STRING, MONTHS, formatLegible, mockDays } from '$lib/services/mockdays';
+	import { FORMAT_STRING, formatLegible, mockDays } from '$lib/services/mockdays';
 	import type Day from '$lib/types/Day';
 	import { demonstrators, isEditMode, warnings } from '$lib/services/store';
 	import Tile from './Tile.svelte';
 	import Tablerow from './Tablerow.svelte';
-	import { DateTime } from 'luxon';
+	import { DateTime, Info } from 'luxon';
 	import { pb } from '$lib/services/pocketbase';
 	import type { EngagementDay } from '$lib/types/Day';
 	import { onDestroy } from 'svelte';
+	import { locale } from '$lib/services/i18n';
 
 	export let month: number;
 	export let year: number;
@@ -74,7 +75,9 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 				</svg>
 			</button>
-			<h3 class="text-xl uppercase items-center flex">{MONTHS[month - 1]} - {year}</h3>
+			<h3 class="text-xl uppercase items-center flex">
+				{Info.months('long', { locale: $locale })[month - 1]} - {year}
+			</h3>
 			<button class="btn btn-square btn-primary rounded-none" on:click={() => handleChangeMonth(1)}
 				><svg
 					xmlns="http://www.w3.org/2000/svg"

@@ -40,6 +40,7 @@
 		"daisyui": "^3.0.3",
 		"ics": "^3.1.0",
 		"luxon": "^3.3.0",
-		"pocketbase": "^0.15.0"
+		"pocketbase": "^0.15.0",
+		"sveltekit-i18n": "^2.2.2"
 	}
 }

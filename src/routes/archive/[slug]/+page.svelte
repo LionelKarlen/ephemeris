@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import MonthTable from '$lib/components/MonthTable.svelte';
+	import { t } from '$lib/services/i18n';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
 <h3 class="text-3xl">
-	Archive <button
+	{$t('archive.archive')}<button
 		class="btn btn-sm btn-ghost btn-circle"
 		on:click={() => goto(`${data.year}/stats`)}
 	>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { t } from '$lib/services/i18n';
 	import { pb } from '$lib/services/pocketbase';
 	import type BaseType from '$lib/types/BaseType';
 	import { DateTime } from 'luxon';
@@ -51,8 +52,8 @@
 	<table class="table w-full">
 		<thead>
 			<tr>
-				<th>{title}</th>
-				<th class="justify-end flex">Actions</th>
+				<th>{$t(`typeForm.${title.toLowerCase()}`)}</th>
+				<th class="justify-end flex">{$t('typeForm.actions')}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -84,10 +85,10 @@
 		</tbody>
 	</table>
 	<div class="flex flex-row justify-center">
-		<button class="btn" on:click={addToList}>Add {title}</button>
+		<button class="btn" on:click={addToList}>{$t(`typeForm.add${title}`)}</button>
 	</div>
 	<div class="flex flex-row justify-end">
-		<button class="btn btn-primary" on:click={update}>Update</button>
+		<button class="btn btn-primary" on:click={update}>{$t('typeForm.update')}</button>
 	</div>
 </div>
 
