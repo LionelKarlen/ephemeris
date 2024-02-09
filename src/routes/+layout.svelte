@@ -32,7 +32,7 @@
 	<div class="content flex flex-col lg:px-20 md:px-10 items-center">
 		{#await updateEmptyCollections()}
 			<span class="loading loading-bars loading-lg" />
-		{:then value}
+		{:then}
 			<slot />
 		{/await}
 	</div>
