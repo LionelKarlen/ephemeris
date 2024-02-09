@@ -13,11 +13,17 @@
 	export let month: number;
 	export let year: number;
 	let days: Day[];
+	let propagate = true;
 
 	$: month, getData();
 
 	async function getData() {
 		days = await getDays();
+		if ($demonstrators.length == 0 && propagate) {
+			console.log('empty demonstrators');
+			propagate = false;
+			demonstrators.set(await pb.collection('demonstrators').getFullList());
+		}
 	}
 
 	onDestroy(async () => {
