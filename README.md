@@ -25,7 +25,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/lionelkarlen/ephemeris2">
+  <a href="https://github.com/lionelkarlen/ephemeris">
     <img src="static/favicon.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -35,11 +35,11 @@
     Modern observatory scheduling and archival management software
 	<br />
     <br />
-    <a href="https://github.com/lionelkarlen/ephemeris2">View Demo</a>
+    <a href="https://github.com/lionelkarlen/ephemeris">View Demo</a>
     ·
-    <a href="https://github.com/lionelkarlen/ephemeris2/issues">Report Bug</a>
+    <a href="https://github.com/lionelkarlen/ephemeris/issues">Report Bug</a>
     ·
-    <a href="https://github.com/lionelkarlen/ephemeris2/issues">Request Feature</a>
+    <a href="https://github.com/lionelkarlen/ephemeris/issues">Request Feature</a>
   </p>
 </div>
 
@@ -116,7 +116,7 @@ While it isn't strictly necessary, it is preferred to use yarn.
 
 ## Roadmap
 
-See the [open issues](https://github.com/lionelkarlen/ephemeris2/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/lionelkarlen/ephemeris/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -158,13 +158,13 @@ Distributed under the EUPL-1.2 License. See `LICENSE.txt` for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/lionelkarlen/ephemeris2.svg?style=for-the-badge
-[contributors-url]: https://github.com/lionelkarlen/ephemeris2/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/lionelkarlen/ephemeris2.svg?style=for-the-badge
-[forks-url]: https://github.com/lionelkarlen/ephemeris2/network/members
-[stars-shield]: https://img.shields.io/github/stars/lionelkarlen/ephemeris2.svg?style=for-the-badge
-[stars-url]: https://github.com/lionelkarlen/ephemeris2/stargazers
-[issues-shield]: https://img.shields.io/github/issues/lionelkarlen/ephemeris2.svg?style=for-the-badge
-[issues-url]: https://github.com/lionelkarlen/ephemeris2/issues
-[license-shield]: https://img.shields.io/github/license/lionelkarlen/ephemeris2.svg?style=for-the-badge
-[license-url]: https://github.com/lionelkarlen/ephemeris2/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/lionelkarlen/ephemeris.svg?style=for-the-badge
+[contributors-url]: https://github.com/lionelkarlen/ephemeris/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/lionelkarlen/ephemeris.svg?style=for-the-badge
+[forks-url]: https://github.com/lionelkarlen/ephemeris/network/members
+[stars-shield]: https://img.shields.io/github/stars/lionelkarlen/ephemeris.svg?style=for-the-badge
+[stars-url]: https://github.com/lionelkarlen/ephemeris/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lionelkarlen/ephemeris.svg?style=for-the-badge
+[issues-url]: https://github.com/lionelkarlen/ephemeris/issues
+[license-shield]: https://img.shields.io/github/license/lionelkarlen/ephemeris.svg?style=for-the-badge
+[license-url]: https://github.com/lionelkarlen/ephemeris/blob/master/LICENSE.txt
