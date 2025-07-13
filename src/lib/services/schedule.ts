@@ -67,7 +67,7 @@ async function getEngagementsInYear(year: number): Promise<EngagementDay[]> {
 		.filter((v) => {
 			const date = v.start;
 			if (date) {
-				// Filter by engagement days
+				// Filter by demonstration days
 				if (isDayFirstSunday(date) || isDayWednesday(date)) {
 					return date;
 				}
@@ -85,10 +85,18 @@ async function getEngagementsInYear(year: number): Promise<EngagementDay[]> {
 	}) as Day[];
 
 	// Get all database days in year
-	const realDays: EngagementDay[] = await pb.collection('days').getFullList({
+	const tmpRealDays: EngagementDay[] = await pb.collection('days').getFullList({
 		filter: `timestamp>="${start.toFormat(FORMAT_STRING)}" && timestamp < "${end.toFormat(
 			FORMAT_STRING
 		)}"`
+	});
+
+	// Filter out realDays, which are not demonstration days
+	const realDays = tmpRealDays.filter((v) => {
+		const date = DateTime.fromFormat(v.timestamp, FORMAT_STRING);
+		if (isDayFirstSunday(date) || isDayWednesday(date)) {
+			return date;
+		}
 	});
 
 	// Get a string[] reference of all timestamps in year, so we can filter the real days out of mock
@@ -116,9 +124,7 @@ async function getEngagementsInYear(year: number): Promise<EngagementDay[]> {
  * @returns `Promise<GenerationDemonstrator[]>`
  */
 async function getDemonstrators(): Promise<GenerationDemonstator[]> {
-	const demonstrators = await (
-		await pb.collection('demonstrators').getFullList()
-	).map((v) => {
+	const demonstrators = (await pb.collection('demonstrators').getFullList()).map((v) => {
 		const obj: GenerationDemonstator = {
 			id: v.id,
 			isSunlab: v.isSunlab,
