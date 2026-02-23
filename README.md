@@ -17,8 +17,6 @@
 -->
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![EUPL-1.2 License][license-shield]][license-url]
 
@@ -34,9 +32,10 @@
   <p align="center">
     Modern observatory scheduling and archival management software
 	<br />
+	<br />
+  <img src="docs/ephemeris_demo.png" alt="demo screenshot" style="border: 1px black solid"/>
     <br />
-    <a href="https://github.com/lionelkarlen/ephemeris">View Demo</a>
-    ·
+	  <br />
     <a href="https://github.com/lionelkarlen/ephemeris/issues">Report Bug</a>
     ·
     <a href="https://github.com/lionelkarlen/ephemeris/issues">Request Feature</a>
@@ -99,7 +98,7 @@ While it isn't strictly necessary, it is preferred to use yarn.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/LionelKarlen/binarytest.git
+   git clone https://github.com/LionelKarlen/ephemeris.git
    ```
 2. Install packages
    ```sh
